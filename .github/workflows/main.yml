@@ -1,0 +1,23 @@
+name: Flutter Workflow
+
+on:
+  push: 
+    branches: ["main", "staging"]
+  pull_request:
+    branches: ["main", "staging"]
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.3.3'
+          channel: 'stable'
+
+      - name: Install dependencies
+        run: flutter pub get
