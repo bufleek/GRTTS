@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:grtts/ui/theme/colors.dart';
+import 'package:grtts/ui/theme/typography.dart';
 import 'package:material_color_generator/material_color_generator.dart';
 
 final theme = ThemeData(
@@ -18,5 +19,28 @@ final theme = ThemeData(
     background: AppColors.white,
     onBackground: AppColors.black,
   ),
+  scaffoldBackgroundColor: AppColors.primary,
   fontFamily: "Exo",
+  elevatedButtonTheme: ElevatedButtonThemeData(style: elevatedButtonStyle),
+);
+
+final elevatedButtonStyle = ButtonStyle(
+  elevation: const MaterialStatePropertyAll(0.0),
+  padding: const MaterialStatePropertyAll(
+    EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+  ),
+  backgroundColor: MaterialStateProperty.resolveWith((states) {
+    return states.contains(MaterialState.disabled)
+        ? AppColors.secondary.withAlpha(128)
+        : AppColors.secondary;
+  }),
+  textStyle: MaterialStatePropertyAll(
+    AppTypography.bodyBold(color: AppColors.onSecondary),
+  ),
+  shape: MaterialStatePropertyAll(
+    RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(10),
+      side: BorderSide.none,
+    ),
+  ),
 );
