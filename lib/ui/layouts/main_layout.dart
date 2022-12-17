@@ -7,39 +7,51 @@ class MainLayout extends StatelessWidget {
   const MainLayout({
     super.key,
     required this.child,
+    this.showTopView = true,
+    this.appBar,
   });
   final Widget child;
+  final bool showTopView;
+  final AppBar? appBar;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: appBar,
       body: SafeArea(
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(top: 20),
-                      child: Text(
-                        "app_name".get(),
-                        style: AppTypography.title(),
+                    if (showTopView)
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(top: 20),
+                            child: Text(
+                              "app_name".get(),
+                              style: AppTypography.title(),
+                            ),
+                          ),
+                          Text(
+                            "fleek_tech".get(),
+                            style: AppTypography.bodyBold(),
+                          ),
+                          const Padding(
+                            padding: EdgeInsets.only(top: 8),
+                            child: Divider(
+                              color: AppColors.onSurface,
+                              thickness: 1,
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                    Text(
-                      "fleek_tech".get(),
-                      style: AppTypography.bodyBold(),
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.only(top: 8),
-                      child: Divider(
-                        color: AppColors.onSurface,
-                        thickness: 1,
-                      ),
-                    ),
                     Expanded(child: child),
                   ],
                 ),
