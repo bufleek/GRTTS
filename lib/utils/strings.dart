@@ -10,4 +10,5 @@ final _strings = {
   "employee_id": "Employee Id",
   "employee_id_hint": "Enter your employee id",
   "continue": "Continue",
+  "greetings": "Hello",
 };

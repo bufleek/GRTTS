@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:grtts/ui/theme/colors.dart';
 
 /// Controls the states of the elevated button
 class ElevatedButtonWrapper extends StatelessWidget {
@@ -28,9 +27,7 @@ class ElevatedButtonWrapper extends StatelessWidget {
         ),
         if (loading)
           const Center(
-            child: CircularProgressIndicator(
-              color: AppColors.secondary,
-            ),
+            child: CircularProgressIndicator(),
           ),
       ],
     );

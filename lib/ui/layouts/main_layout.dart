@@ -40,7 +40,7 @@ class MainLayout extends StatelessWidget {
                         thickness: 1,
                       ),
                     ),
-                    child,
+                    Expanded(child: child),
                   ],
                 ),
               ),

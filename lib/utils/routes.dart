@@ -1,3 +1,4 @@
 abstract class AppRoutes {
-  static const employee_onboarding = "employee_onboarding";
+  static const employeeOnBoarding = "employee_onboarding";
+  static const home = "home";
 }
