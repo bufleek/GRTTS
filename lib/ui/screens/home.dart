@@ -44,8 +44,8 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             Text(
               provider.isClockedIn
-                  ? "You are clocked out"
-                  : "You clocked in at ${"7:00 am"}",
+                  ? "You clocked in at ${"7:00 am"}"
+                  : "You are clocked out",
               style: AppTypography.bodyBold(),
             ),
             Expanded(

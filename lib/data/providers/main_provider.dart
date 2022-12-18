@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:grtts/data/auth_manager.dart';
 import 'package:grtts/data/models/time_summary.dart';
 import 'package:grtts/data/repos/main_repo.dart';
 
@@ -11,7 +12,7 @@ class MainProvider extends ChangeNotifier {
   void identifyUser(String employeeId) =>
       _mainRepo.identifyUser(employeeId, notifyStateChanged: notifyListeners);
 
-  bool isClockedIn = false;
+  bool isClockedIn = AuthManager().user?.isClockedIn ?? false;
   bool isClockingInProgress = false;
   List<TimeSummary> timeReportSummaries = [
     TimeSummary(title: "This week", hours: 20),
