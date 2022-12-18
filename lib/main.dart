@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:grtts/data/auth_manager.dart';
 import 'package:grtts/data/providers/main_provider.dart';
 import 'package:grtts/ui/screens/employee_onboarding.dart';
 import 'package:grtts/ui/screens/home.dart';
@@ -8,7 +9,9 @@ import 'package:grtts/utils/routes.dart';
 import 'package:grtts/utils/strings.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await AuthManager().initialize();
   runApp(const MyApp());
 }
 
@@ -24,7 +27,9 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: "app_name".get(),
         theme: theme,
-        initialRoute: AppRoutes.timeReports,
+        initialRoute: AuthManager().isAuthenticated
+            ? AppRoutes.home
+            : AppRoutes.employeeOnBoarding,
         routes: {
           AppRoutes.home: (context) => const HomeScreen(),
           AppRoutes.employeeOnBoarding: (context) =>

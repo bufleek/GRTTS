@@ -3,6 +3,7 @@ import 'package:grtts/data/providers/main_provider.dart';
 import 'package:grtts/ui/layouts/main_layout.dart';
 import 'package:grtts/ui/theme/typography.dart';
 import 'package:grtts/ui/widgets/home/home_item.dart';
+import 'package:grtts/utils/routes.dart';
 import 'package:grtts/utils/strings.dart';
 import 'package:provider/provider.dart';
 
@@ -61,7 +62,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       enabled: !provider.isClockingInProgress,
                     ),
                     HomeItem(
-                      onClicked: () {},
+                      onClicked: () {
+                        Navigator.of(context).pushNamed(AppRoutes.timeReports);
+                      },
                       text: "View Time Reports",
                     )
                   ],

@@ -22,21 +22,24 @@ class HomeItem extends StatelessWidget {
     return Stack(
       alignment: Alignment.center,
       children: [
-        Card(
-          color: AppColors.white.withAlpha((enabled && !loading) ? 128 : 64),
-          elevation: 0,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-          child: Center(
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: Text(
-                text,
-                textAlign: TextAlign.center,
-                style: AppTypography.bodyBold(
-                    color: (enabled && !loading)
-                        ? AppColors.black
-                        : AppColors.black.withAlpha(128)),
+        InkWell(
+          onTap: onClicked,
+          child: Card(
+            color: AppColors.white.withAlpha((enabled && !loading) ? 128 : 64),
+            elevation: 0,
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            child: Center(
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Text(
+                  text,
+                  textAlign: TextAlign.center,
+                  style: AppTypography.bodyBold(
+                      color: (enabled && !loading)
+                          ? AppColors.black
+                          : AppColors.black.withAlpha(128)),
+                ),
               ),
             ),
           ),

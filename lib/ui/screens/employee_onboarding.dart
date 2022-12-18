@@ -17,7 +17,7 @@ class EmployeeOnboardingScreen extends StatefulWidget {
 }
 
 class _EmployeeOnboardingScreenState extends State<EmployeeOnboardingScreen> {
-  get _mainProvider => context.read<MainProvider>();
+  MainProvider get _mainProvider => context.read<MainProvider>();
 
   final continueBtnStateController = MaterialStatesController();
   final employeeIdTextController = TextEditingController();
@@ -27,21 +27,23 @@ class _EmployeeOnboardingScreenState extends State<EmployeeOnboardingScreen> {
   void initState() {
     Future.delayed(Duration.zero, () {
       // INITIALIZING STATE OF CONTINUE BTN
-      // continueBtnStateController.update(
-      //     MaterialState.disabled, _mainProvider.loading);
+      continueBtnStateController.update(
+          MaterialState.disabled, _mainProvider.isIdentifyingUser);
     });
     super.initState();
   }
 
   void _handleSubmit() {
     if (_formKey.currentState!.validate()) {
-      // TODO SUBMIT EMPLOYEE ONBOARDING FORM
+      _mainProvider.identifyUser(employeeIdTextController.text);
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return MainLayout(
+      enforceAuthRequired: false,
+      redirectOnAuthenticated: true,
       child: SingleChildScrollView(
         padding: const EdgeInsets.only(top: 40),
         child: Consumer<MainProvider>(
@@ -54,14 +56,19 @@ class _EmployeeOnboardingScreenState extends State<EmployeeOnboardingScreen> {
                     label: "employee_id".get(),
                     hint: "employee_id_hint".get(),
                     controller: employeeIdTextController,
-                    // enabled: !provider.loading,
-                    // initialValue: provider.employeeId,
+                    enabled: !provider.isIdentifyingUser,
+                    validator: (value) {
+                      if (value == null || value.trim().isEmpty) {
+                        return "This field is required";
+                      }
+                      return null;
+                    },
                   ),
                   Container(
                     margin: const EdgeInsets.only(top: 20),
                     child: ElevatedButtonWrapper(
-                      onPressed: () {},
-                      // loading: provider.loading,
+                      onPressed: _handleSubmit,
+                      loading: provider.isIdentifyingUser,
                       statesController: continueBtnStateController,
                       child: Container(
                         width: double.infinity,
