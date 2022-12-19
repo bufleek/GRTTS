@@ -38,7 +38,6 @@ class _MainLayoutState extends State<MainLayout> {
   }
 
   void onAuthChanged() {
-    print("onAuthChanged Called");
     if (widget.enforceAuthRequired && !AuthManager().isAuthenticated) {
       Navigator.of(context).pushNamedAndRemoveUntil(
           AppRoutes.employeeOnBoarding, (route) => false);

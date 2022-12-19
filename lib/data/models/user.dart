@@ -1,16 +1,22 @@
+import 'package:grtts/data/models/office.dart';
+import 'package:grtts/data/models/time_log.dart';
+
 class User {
   final int id;
   final String employeeId;
   final String firstName;
   final String lastName;
-  final bool isClockedIn;
+  TimeLog? activeTimeLog;
+  final List<Office> offices;
+  bool get isClockedIn => activeTimeLog != null;
 
   User({
     required this.id,
     required this.employeeId,
     required this.firstName,
     required this.lastName,
-    required this.isClockedIn,
+    required this.activeTimeLog,
+    required this.offices,
   });
 
   factory User.fromJson(Map<String, dynamic> json) {
@@ -19,7 +25,18 @@ class User {
       employeeId: json["employee_id"],
       firstName: json["first_name"],
       lastName: json["last_name"],
-      isClockedIn: json["is_clocked_in"],
+      activeTimeLog: json["active_time_log"] == null
+          ? null
+          : TimeLog.fromJson(json["active_time_log"]),
+      offices: Office.parseOfficesFromJson(json["offices"]),
     );
+  }
+
+  void markAsCheckedOut() {
+    activeTimeLog = null;
+  }
+
+  void markAsCheckedIn(TimeLog timeLog) {
+    activeTimeLog = timeLog;
   }
 }

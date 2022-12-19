@@ -17,7 +17,7 @@ class AuthManager {
   Future<void> initialize() async {
     if (!isInitialized) {
       final sp = await SharedPreferences.getInstance();
-      final employeeId = sp.getString(PreferenceKeys.employee_id);
+      final employeeId = sp.getString(PreferenceKeys.employeeId);
       if (employeeId != null && employeeId.isNotEmpty) {
         await identifyUser(employeeId);
       }
@@ -44,8 +44,7 @@ class AuthManager {
           isAuthenticated = user != null;
           notifyListeners();
           final sp = await SharedPreferences.getInstance();
-          await sp.setString(
-              PreferenceKeys.employee_id, user?.employeeId ?? "");
+          await sp.setString(PreferenceKeys.employeeId, user?.employeeId ?? "");
           break;
         default:
           break;
