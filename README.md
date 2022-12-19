@@ -1,5 +1,7 @@
 # GRTTS - Geo-Restricted Time Tracking System
 
+[VIEW GRTTS BACKEND PROJECT](https://github.com/bufleek/GRTTS-Backend)
+
 ## Bruno Kiprop - SCCJ/01108/2018
 
 ## Tools Used
