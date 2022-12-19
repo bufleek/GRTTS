@@ -30,4 +30,9 @@ abstract class AppTypography {
         fontWeight: FontWeight.bold,
         color: color,
       );
+  static caption({Color color = AppColors.onSurface}) => TextStyle(
+        fontFamily: "Exo",
+        fontSize: 14,
+        color: color,
+      );
 }

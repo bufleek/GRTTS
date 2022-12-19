@@ -29,9 +29,10 @@ class TimeSummaryItem extends StatelessWidget {
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(16)),
               child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 20),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 20, horizontal: 2),
                 child: Text(
-                  "${timeSummary.hours} hrs",
+                  "${timeSummary.hours.toStringAsFixed(4)} hrs",
                   textAlign: TextAlign.center,
                   style: AppTypography.bodyBold(color: AppColors.black),
                 ),

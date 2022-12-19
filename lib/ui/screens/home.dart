@@ -5,7 +5,10 @@ import 'package:grtts/ui/theme/typography.dart';
 import 'package:grtts/ui/widgets/home/home_item.dart';
 import 'package:grtts/utils/routes.dart';
 import 'package:grtts/utils/strings.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+
+import '../../data/auth_manager.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -20,11 +23,10 @@ class _HomeScreenState extends State<HomeScreen> {
     if (_mainProvider.isClockingInProgress) {
       return;
     }
-    //TODO
     if (_mainProvider.isClockedIn) {
-      //CLOCK OUT
+      _mainProvider.clockOut();
     } else {
-      //CLOCK IN
+      _mainProvider.clockIn();
     }
   }
 
@@ -32,19 +34,20 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return MainLayout(
       child: Consumer<MainProvider>(builder: (context, provider, __) {
+        final user = AuthManager().user;
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
               padding: const EdgeInsets.only(top: 20),
               child: Text(
-                "${'greetings'.get()} Bruno",
+                "${'greetings'.get()} ${(user?.firstName == null || (user?.firstName.isEmpty ?? false)) ? "User (${user?.employeeId ?? ""})" : user?.firstName}",
                 style: AppTypography.body(),
               ),
             ),
             Text(
               provider.isClockedIn
-                  ? "You clocked in at ${"7:00 am"}"
+                  ? "You clocked in at ${DateFormat("hh:mm:ss a").format(DateTime.parse(user!.activeTimeLog!.timeIn!).add(const Duration(hours: 3)))}"
                   : "You are clocked out",
               style: AppTypography.bodyBold(),
             ),

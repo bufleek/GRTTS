@@ -6,7 +6,7 @@ class User {
   final String employeeId;
   final String firstName;
   final String lastName;
-  final TimeLog? activeTimeLog;
+  TimeLog? activeTimeLog;
   final List<Office> offices;
   bool get isClockedIn => activeTimeLog != null;
 
@@ -30,5 +30,13 @@ class User {
           : TimeLog.fromJson(json["active_time_log"]),
       offices: Office.parseOfficesFromJson(json["offices"]),
     );
+  }
+
+  void markAsCheckedOut() {
+    activeTimeLog = null;
+  }
+
+  void markAsCheckedIn(TimeLog timeLog) {
+    activeTimeLog = timeLog;
   }
 }
